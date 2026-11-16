@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: eneba-marketplace-demo
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/ready
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_ORIGIN
+        sync: false
+      - key: SECURE_COOKIES
+        value: "true"
+      - key: SEED_DEMO
+        value: "true"
+      - key: SEARCH_MODE
+        value: trigram
