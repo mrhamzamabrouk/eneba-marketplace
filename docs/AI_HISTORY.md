@@ -4,7 +4,7 @@ Status: INCOMPLETE until every assignment session is verified. This index and de
 
 ## Current implementation session
 
-The original Codex JSONL rollout was verified against the exact implementation request and the first three assistant messages. [Current implementation transcript](ai-history/implementation.md) is exported by scripts/export-history.ps1, preserving original user prompts and public assistant responses. Tool records, system/developer instructions and internal reasoning are excluded. No messages are reconstructed. The original is copied privately to the ignored .private directory.
+The original Codex JSONL rollout was verified against the exact implementation request and the first three assistant messages. [Current implementation and deployment transcript](ai-history/implementation.md) is exported by scripts/export-history.ps1, preserving original user prompts and public assistant responses, including the account-access follow-ups and live deployment in this same conversation. Tool records, system/developer instructions and internal reasoning are excluded. No messages are reconstructed. The original is copied privately to the ignored .private directory.
 
 scripts/watch-history.ps1 can refresh the export every ten seconds for a bounded two-hour run, including the eventual final response if the host writes it during that period. Check the transcript after the response rather than assuming it was captured. Re-run export-history.ps1 with the original session path if the watcher has stopped. A final original message absent from the Markdown is still a missing segment.
 

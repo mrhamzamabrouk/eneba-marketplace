@@ -1,6 +1,6 @@
 # Actual verification results — 16 November 2026
 
-This file records observed execution, not promises or coverage claims. No public app deployment has been verified yet. The source repository and remote CI are verified below.
+This file records observed execution, not promises or coverage claims. The [public app](https://eneba-marketplace-demo-uuhw.onrender.com), source repository and remote CI are verified below.
 
 | Check | Observed result |
 | --- | --- |
@@ -21,8 +21,14 @@ This file records observed execution, not promises or coverage claims. No public
 | Database-driven browser content | Edited the isolated test database's banner, observed new heading in a fresh real browser, then restored the original; no frontend source edit |
 | Portable Docker | Production image built with Node 24 / Go 1.25, application runs non-root |
 | Remote GitHub Actions | [Run 43851025137](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43851025137) completed successfully for b6d7e8c3cda4bf62249877abccc3fab20d287b03: frontend checks/audit, real PostgreSQL tests, production build and all browser scenarios |
+| Exact deployed-source CI | [Run 43857954156](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43857954156) passed for 2ca1486f16dbd93e01095e06ac1ec89c7683c599, the actual deployed source |
 | Public source/history links | Public repository main/tree verified over unauthenticated HTTPS; 104 source paths inspected, no private/generated files; history index returned HTTP 200 |
 | Container smoke/restart | Production readiness, nested routes, JS/CSS, API/asset 404s, origin check, cookies, declined/successful checkout and duplicate retry passed; same order/key survived actual container restart |
+| Public deployment | Render Free Docker deployment dep-dbtf2p0ae00c73d8ahk0 became live at 12:05:16 UTC; external Neon Free PostgreSQL 17, both Frankfurt; readiness and Eldn Ring search returned expected results |
+| Public browser suite | `E2E_BASE_URL=https://eneba-marketplace-demo-uuhw.onrender.com`, `npm.cmd run test:e2e`: all eight desktop/mobile scenarios passed in 50.8s against the real HTTPS app/database |
+| Public HTTPS security | Fresh account/purchase through the UI; session cookie Secure, HttpOnly, SameSite=Lax; foreign Origin logout rejected with 403; private order returned to its owner |
+| Public routing/assets | Refreshed /store, /product/elden-ring and /orders returned 200; referenced JS/CSS returned 200; missing API returned JSON 404, missing static file returned 404; all 12 homepage images decoded after scrolling |
+| Public restart persistence | Render CLI restarted the actual service; logs show new process at 12:10:05 UTC; a fresh login retrieved the same prior order, total and exact fake key |
 | Final local preview | http://localhost:8080 returned ready and references the final tested React bundle; app/PostgreSQL retained, temporary test servers stopped |
 | AI history | Verified original rollout; Markdown prompts/responses export and private original copy. Earlier planning still missing; final-response capture must be checked after it is written |
 
@@ -38,6 +44,6 @@ This file records observed execution, not promises or coverage claims. No public
 
 ## Execution boundaries
 
-The integration test fixture refuses database names that do not end in `_test`, creates a unique schema per case and removes that schema afterward. Browser/smoke tests use isolated eneba_e2e_test, not the development or public database. Test data includes only example.com accounts and fake keys.
+The integration test fixture refuses database names that do not end in `_test`, creates a unique schema per case and removes that schema afterward. Local browser/smoke tests used isolated eneba_e2e_test. Public browser evaluation used ordinary UI/API requests to create example.com demo accounts and buy fake inventory; no destructive database tests, migration teardown or SQL mutation tests targeted the public database.
 
-CI in `.github/workflows/ci.yml` was executed remotely and passed for the runtime source revision linked above. Public-app HTTPS cookies, live persistence and deployed fresh-browser evaluation remain unverified until deployment exists. No coverage percentage, real payment, real activation, email delivery or real sales/rating claim is made.
+CI in `.github/workflows/ci.yml` was executed remotely and passed for the exact deployed source revision linked above. Public HTTPS cookies, live persistence and fresh-browser evaluation passed. Screenshots captured before lazy images load can contain blank covers; all 12 homepage images were separately scrolled into view and decoded, and a fully loaded screenshot was inspected. No coverage percentage, real payment, real activation, email delivery or real sales/rating claim is made. The earlier planning conversation is still missing from the mandatory full AI history.

@@ -214,3 +214,118 @@ The final preview check caught a mismatch: port 8080 is healthy but is serving a
 The local app is now verified at [http://localhost:8080](http://localhost:8080), with the final React build and database readiness confirmed. The cleanup check had compared Windows paths with different slash styles and missed the old process; that is fixed.
 
 Temporary test servers are stopped. The app and persistent PostgreSQL database remain running. I’m committing the final status and history snapshot so the new deployment session can pick up from the verified state.
+
+## 33. assistant
+
+The latest pushed revision has also passed GitHub Actions. The two-hour history recorder has expired, so I’m restarting it to capture the closing messages locally. The earlier planning conversation is still missing and remains clearly marked in the history index.
+
+## 34. assistant
+
+The code is implemented and published. The app runs locally at **http://localhost:8080**.
+
+- [GitHub repository](https://github.com/mrhamzamabrouk/eneba-marketplace)
+- [Passing GitHub Actions](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43857954156): 11 Go/database tests, four cart tests, eight desktop/mobile browser scenarios.
+- [AI history index](https://github.com/mrhamzamabrouk/eneba-marketplace/blob/main/docs/AI_HISTORY.md): original prompts/responses captured with explicit privacy redactions. Earlier planning history remains missing.
+
+Verified features include 24 products, three sellers, database-driven homepage blocks, filters, typo search, accounts, persistent guest carts, simulated checkout, private keys and order history. Container restart persistence passed.
+
+**Public deployment remains incomplete.** Neon and Render are installed, but their tools are unavailable in this running chat. Start a new Codex chat in this project and paste:
+
+> Continue deployment from docs/STATUS.md using the connected Neon and Render plugins. Use free plans only. Public publication under mrhamzamabrouk is already authorized. Preserve previous AI history and capture this session separately.
+
+This follows the [plugin activation instructions](https://learn.chatgpt.com/docs/plugins). The handoff records the exact tested state.
+
+Ten interview questions with short answers:
+
+1. **Why integer cents?** They keep totals exact: 799 × 2 = 1598.
+2. **What does the cart preserve?** The selected offer, seller, quantity and quoted price.
+3. **Why bcrypt?** It provides established, deliberately slow password hashing.
+4. **How do sessions work?** Random cookie tokens correspond to hashes stored in PostgreSQL.
+5. **How is CSRF blocked?** Mutations require the configured Origin; cookies also use SameSite.
+6. **Why a transaction?** Orders and key allocation commit together or roll back.
+7. **How is overselling prevented?** Offer/key locks and unique inventory constraints protect allocation.
+8. **How are retries safe?** A user-scoped reference and request fingerprint identify one checkout.
+9. **How does typo search work?** Trigram matching ranks fuzzy results below exact/prefix matches; edit distance supplies a tested fallback.
+10. **Who can read purchased keys?** Only the authenticated order owner; another account receives 404.
+
+Your five-minute demo: spend minute one on homepage and typo search; minute two on filters and seller comparison; minute three on guest-cart persistence and signup; minute four on declined then successful payment; minute five on keys, history, logout and the transaction code. [Detailed script](https://github.com/mrhamzamabrouk/eneba-marketplace/blob/main/docs/DEMO.md)
+
+Before submission, add the missing planning history, review/push the closing transcript, and attach your accurate English CV and full name.
+
+The browser deployment fallback was blocked by: “Computer Use was not approved to use Google Chrome.”
+
+## 35. user
+
+<environment_context>
+  <current_date>2026-11-16</current_date>
+  <timezone>Africa/Casablanca</timezone>
+  <filesystem><workspace_roots><root>[PRIVACY REDACTION: local workspace path]</root></workspace_roots><permission_profile type="disabled"><file_system type="unrestricted" /></permission_profile></filesystem>
+</environment_context>
+
+## 36. user
+
+did you deploy or not yet if not yet use the plugins to deploy everything so I can see the app and then if there is any improvments I will guide you
+
+
+## 37. assistant
+
+Not yet—the code is published and tested, but the public app isn’t deployed. I’ll use the Render and Neon plugins now to deploy it on free plans and verify the live purchase flow.
+
+## 38. assistant
+
+I’m using the Render deployment and Neon database skills. The skills are loaded, but their hosted tools still aren’t exposed here, so I’m checking the plugins’ supported CLI/MCP access paths rather than stopping at the configuration file.
+
+## 39. assistant
+
+I found the access blocker: the coding process isn’t receiving the app connection bridge, and the official Render CLI reports “run `render login` to authenticate.” I’ve installed the deployment tools locally without changing the app.
+
+I’ll open the official sign-in flow so you can approve access in your browser. No passwords or API keys need to be pasted here.
+
+## 40. assistant
+
+Render is authenticated now, and its CLI validated the deployment blueprint. I selected your only Render workspace, “Hamza’s workspace”; it has no existing services to disturb.
+
+Neon is still waiting for browser sign-in. Once that completes, I can create the free database and connect it to the web service.
+
+## 41. user
+
+<send_user_message_question_reply>
+[{"questionItemId":"[\"request_user_input_async\",\"call_b0cf125338f34a36b57fb0fbee523414\",0]","question":"Please complete the Neon sign-in/authorization page that just opened in your browser, then reply “done.” Render authorization is already complete. Keep passwords and tokens in the browser.","answer":"done now"}]
+</send_user_message_question_reply>
+
+
+## 42. assistant
+
+Neon sign-in succeeded. Your Neon organization is on the Free plan, and the Render blueprint is valid. I’m creating the database in Frankfurt and placing the web service nearby, then passing the database connection directly into Render’s secret environment configuration.
+
+## 43. assistant
+
+Both free resources are created: the Neon PostgreSQL database and the Render web service in Frankfurt. The database credential is stored in Render and hasn’t been printed or committed.
+
+Render is building the app now. I’m applying its assigned HTTPS URL to the session/origin configuration, then I’ll check the live pages and checkout before calling it ready.
+
+## 44. assistant
+
+The app is live: **https://eneba-marketplace-demo-uuhw.onrender.com**
+
+The database is ready, and the live search API correctly finds **Elden Ring** for **“Eldn Ring.”** You can start browsing now. I’m finishing the fresh-browser checkout, cookie, and persistence checks.
+
+## 45. assistant
+
+All eight desktop/mobile browser tests passed against the public app. Successful and declined payments, cart persistence, price reconfirmation, and order ownership all work live. HTTPS session-cookie flags and cross-origin protection passed too.
+
+I’m doing the final restart check to confirm the same saved order and fake key survive, then updating the repository with the live URL.
+
+## 46. assistant
+
+The app is now live, and all eight public desktop/mobile browser tests passed. I’m finishing the persistence check and updating the repository with the live URL so you can start reviewing it.
+
+## 47. assistant
+
+You can open it now: [Eneba marketplace demo](https://eneba-marketplace-demo-uuhw.onrender.com).
+
+The restart check also passed: the same order and fake key remained available after Render restarted. Both services are on free plans. Create a demo account to try checkout; no real payment is involved.
+
+## 48. assistant
+
+The live checks are complete. I’ve updated the deployment instructions and test record with the verified URL. The app is ready for your review; the earlier planning conversation is still missing from the full assignment history.

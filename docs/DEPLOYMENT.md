@@ -1,41 +1,65 @@
-# Free deployment preparation
+# Live free deployment
 
-No public app deployment has been created. The source is published at https://github.com/mrhamzamabrouk/eneba-marketplace and runtime source passed remote CI. No paid resource or payment method has been used. The checked-in Dockerfile and Render blueprint build one Go service containing the React assets; PostgreSQL stays external.
+**Public app:** https://eneba-marketplace-demo-uuhw.onrender.com
 
-## Provider verification, 16 November 2026
+**Source:** https://github.com/mrhamzamabrouk/eneba-marketplace
 
-[Render Free documentation](https://render.com/docs/free): Free web services sleep after 15 idle minutes, may take about a minute to wake, and lose local filesystem changes on restarts/redeploys. Free PostgreSQL on Render expires, so do not use it for persistent assignment data. Check dashboard resource/usage limits before provisioning; choose Free and never upgrade or add a payment method.
+Deployed and evaluated on 16 November 2026. Register your own demo account with an example.com address and a unique test password. Payments and keys are simulated; no card details or email delivery are involved.
 
-[Neon pricing](https://neon.com/pricing): Free is $0 without a credit card, currently 100 CU-hours per project/month and 1 GB storage per project. Use one small project. [Neon's pg_trgm guide](https://neon.com/docs/extensions/pg_trgm) confirms the extension is supported. Account limits and selected plan must still be checked in the actual account at creation time.
+## Actual resources
 
-## Exact remaining access steps
+| Resource | Verified configuration |
+| --- | --- |
+| Render service | `srv-dbtf22jncjis73a377u0`, eneba-marketplace-demo, Free Docker web service, Frankfurt |
+| Render dashboard | https://dashboard.render.com/web/srv-dbtf22jncjis73a377u0 |
+| Neon project | `super-salad-02795926`, eneba-marketplace, verified Free organization, AWS eu-central-1 |
+| Database | PostgreSQL 17, database eneba, role eneba_owner; fixed 0.25 CU with scale-to-zero |
+| Runtime source | `2ca1486f16dbd93e01095e06ac1ec89c7683c599` |
+| Live deployment | `dep-dbtf2p0ae00c73d8ahk0`, live at 12:05:16 UTC |
+| Restart check | New server startup at 12:10:05 UTC; same order and fake key recovered after a fresh login |
+| Health check | `/api/ready`; Render-provided PORT, bound to `0.0.0.0:10000` |
 
-1. Neon, Render and GitHub are now confirmed installed, and the user confirmed connected. GitHub account access was verified. The current session does not expose Neon/Render tools; start a new session in this same workspace to activate newly installed plugin tools if they remain unavailable. Do not request credentials in chat or unnecessarily reconnect working accounts.
-2. The user-authorized public source is pushed under mrhamzamabrouk: https://github.com/mrhamzamabrouk/eneba-marketplace. Do not recreate it or re-request authorization. Private commit email was removed from the agent-created initial commit and a GitHub noreply address configured for this repository only. Source/transcript privacy review excludes private originals, CV, tokens and unrelated account labels. Check STATUS.md for the passing CI source revision.
-3. Create a Neon **Free** project/database in a region near Render. Save its TLS connection string directly in Render's secret environment configuration as `DATABASE_URL`. Do not paste it into chat, source, screenshots or command output.
-4. Create a Render **Free** Docker web service from the reviewed repository, using the root Dockerfile or render.yaml blueprint. Set `APP_ORIGIN` to its exact assigned HTTPS URL, `SECURE_COOKIES=true`, `SEED_DEMO=true`, and `SEARCH_MODE=trigram`. Render supplies `PORT`. Use `/api/ready` for readiness.
-5. Deploy the exact tested commit, record the commit SHA and URL, and perform the fresh-browser checks below. Do not call the assignment ready just because a build succeeds.
+The public repository main branch builds using the root multistage Dockerfile. Auto-deploy is off; deployments explicitly target a reviewed, passing commit. The checked-in render.yaml validates successfully as a reusable template; this existing service was API-created and is not Blueprint-managed. Do not create duplicate resources to apply changes.
 
-Startup runs versioned goose migrations, then an insert-only seed when requested. The seed locks one advisory transaction, does not overwrite existing products/banner edits, does not replenish sold keys, and never deletes users or orders. Offer inventory is seeded only when that offer is first inserted. All mutable state is in PostgreSQL, never the container filesystem.
+Installed Render/Neon plugin skills guided the deployment. Their remote tools were not exposed in this session, so official Render CLI 2.36.0, Neon CLI 9.5.0 and the official Render API were used after the user completed browser authorization. Render credentials stay in its standard CLI store; Neon uses its keyring-backed eneba-deployment profile. The database URL was transferred directly from the authenticated Neon CLI to Render in process memory, without logging or a source-file copy.
 
-## Local production/container verification
+## Runtime configuration
 
-```powershell
-docker build -t eneba-demo:test .
-docker run --rm --name eneba-demo-smoke --network eneba-marketplace_default -p 127.0.0.1:8082:8080 -e DATABASE_URL=postgres://eneba:localdemo@db:5432/eneba_e2e_test?sslmode=disable -e APP_ORIGIN=http://localhost:8082 -e SECURE_COOKIES=false -e SEED_DEMO=true eneba-demo:test
-```
+| Name | Live setting |
+| --- | --- |
+| `DATABASE_URL` | Secret stored only in Render environment configuration; direct Neon TLS connection, sslmode=verify-full |
+| `APP_ORIGIN` | https://eneba-marketplace-demo-uuhw.onrender.com |
+| `SECURE_COOKIES` | true |
+| `SEED_DEMO` | true |
+| `SEARCH_MODE` | trigram |
+| `PORT` | Supplied by Render |
 
-That URL/password is a loopback development fixture, not a production credential. In another terminal check `Invoke-RestMethod http://localhost:8082/api/ready`. Production cookies must be Secure with HTTPS. The integration tests exercise the Secure flag, while local browser tests intentionally use HTTP and `SECURE_COOKIES=false`.
+The direct TLS endpoint supports startup goose migrations; the application bounds its pgxpool to eight connections. Production HTTPS cookies are Secure, HttpOnly and SameSite=Lax. All mutable state lives in Neon PostgreSQL, never the ephemeral web-service filesystem.
 
-## Required fresh public evaluation
+Startup runs versioned migrations and an insert-only seed inside an advisory lock. It does not overwrite existing product/banner edits, replenish sold keys, or delete users/orders. Seed inventory is inserted only for newly inserted offers. Restart persistence was verified on this actual deployment.
 
-- Open the URL in a clean browser context; verify homepage, typo search, combined store filters, and seller selection.
-- Register a demo account, preserve the guest cart, exercise declined and successful simulated payments, refresh the order page and inspect fake keys.
-- Check session HttpOnly/SameSite/Secure flags over HTTPS, origin rejection, logout and a second account's denied order access.
-- Refresh `/product/elden-ring`, `/store`, and `/orders`; verify JavaScript/CSS/artwork requests succeed and missing `/api/...` remains JSON 404.
-- Record an order ID privately, restart the service, sign in again and verify the same order/keys remain. Do not run destructive contention tests against the public database.
-- Open GitHub, app and full AI-history links as a reviewer. Record the deployed commit and actual results in TEST_RESULTS.md.
+## Updating this deployment
 
-## Recovery
+1. Implement and test changes locally using isolated test databases. Run the appropriate checks and wait for passing GitHub Actions on the source revision.
+2. Reuse the existing service and database; keep both Free plans. Do not print secrets or copy the database URL into commands/source/screenshots.
+3. Deploy the tested commit explicitly. With the authenticated Render CLI available on PATH:
 
-Revert to a known tested source revision if needed; current migrations are additive and no destructive migration runs automatically. Do not run goose down against public data. Keep Neon data independent of the web-service lifecycle. If a free quota is exhausted, report the limitation; never purchase an upgrade. Cold starts are expected and should be mentioned in the submission.
+   ```powershell
+   render deploys create srv-dbtf22jncjis73a377u0 --commit <tested-commit-sha> --wait --confirm --output json
+   ```
+
+   The project-local executable is `.tools/render-cli/render.exe`; it is ignored, not distributed with the repository. Authenticate through the official browser flow if access actually expires.
+
+4. Verify readiness, the changed flow and production smoke behavior. Record the actual deployed SHA/results. Documentation-only updates do not require a runtime redeployment.
+
+Do not run goose down, destructive Go integration tests, or database resets against public data. Use local `_test` databases for contention and migration tests. A controlled public browser evaluation may create ordinary demo accounts and simulated purchases; routine test runs belong on an isolated server.
+
+## Observed public evaluation
+
+All eight desktop/mobile Playwright scenarios passed against the public URL in 50.8 seconds. Separate checks passed for readiness, typo-search API, HTTPS cookie flags, foreign Origin rejection, nested-route refresh, JS/CSS requests, homepage image decoding and distinct missing API/static 404s. A real Render restart retained a purchased order and the exact same fake key. See TEST_RESULTS.md for details and limits.
+
+## Free-tier behavior and recovery
+
+Both selected resources were verified as Free before creation. No upgrade, payment method or purchase was made. [Render Free services](https://render.com/docs/free) sleep after 15 idle minutes and can take about a minute to wake; local filesystem changes do not persist. [Neon Free](https://neon.com/pricing) was checked at deployment (100 CU-hours and 1 GB per project); its actual organization plan was verified as free. Monitor account quotas; if exhausted, report the limitation instead of purchasing an upgrade.
+
+Roll back to a known tested commit if needed; current startup migrations are additive. Keep Neon data independent of service replacements. Never expose credentials in issue reports or logs. The missing earlier AI planning transcript affects submission completeness, not this live app's availability.

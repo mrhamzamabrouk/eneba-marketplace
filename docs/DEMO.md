@@ -1,6 +1,6 @@
 # Five-minute demonstration
 
-Use the local production build until a public deployment is verified. Open a clean browser, use an example.com demo account and keep the Network panel available. All keys are fake.
+Open the verified [public app](https://eneba-marketplace-demo-uuhw.onrender.com) in a clean browser, register an example.com demo account and keep the Network panel available. All keys are fake. Allow time for the free host to wake if it has been idle.
 
 **0:00–0:40 — Discover.** Show the unofficial demo notice, banner, best sellers and deals. Explain that the three sections fetch separate Go endpoints and that PostgreSQL holds their content. Best sellers use seeded demo popularity, not real sales.
 
@@ -14,4 +14,4 @@ Use the local production build until a public deployment is verified. Open a cle
 
 **3:55–5:00 — Explain one transaction.** Open `backend/internal/app/checkout.go`. Point to normalized inputs, the per-user idempotency row, sorted offer locks, price/stock checks and one transaction commit. Show the real contention tests. Explain the scope choices, CI, deployment status and honest AI-history gap.
 
-If asked about readiness: local verification and public delivery are separate. Do not imply GitHub, public deployment or a complete earlier transcript exists until verified. Before submission attach Hamza Mabrouk's accurate English CV and full name; do not send the application automatically.
+If asked about readiness: GitHub, public deployment, eight public browser scenarios and live restart persistence are verified. The earlier planning transcript is still missing, so the complete submission package is not ready. Before submission attach Hamza Mabrouk's accurate English CV and full name; do not send the application automatically.

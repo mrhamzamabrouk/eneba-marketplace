@@ -7,7 +7,8 @@ Authority: original Eneba Internship Assignment PDF, then the Master prompt in E
 - [x] M2: Independent database-backed homepage blocks, combined URL filters, pagination, partial/fuzzy search including a tested extension-free fallback, seller offers.
 - [x] M3: Bcrypt/session/origin checks, persistent guest cart, atomic price-checked idempotent checkout and private keys/history; database contention and full browser flow verified.
 - [x] M4: Actual Eneba browser reference, original local artwork, desktop/mobile screenshot review, keyboard flow and overflow assertions.
-- [x] M5 local: Go vet and 11 Go tests including isolated PostgreSQL, also passed inside Go 1.25 Docker; frontend lint/typecheck/build and four behavior tests; all eight final desktop/mobile browser scenarios passed against the production container. CI authored, Docker smoke/restart persistence passed.
-- [ ] M6: Public deployment and fresh-browser verification, GitHub/history links, demonstration and explanation package.
+- [x] M5: Go vet and 11 Go tests including isolated PostgreSQL, also passed inside Go 1.25 Docker; frontend lint/typecheck/build and four behavior tests; all eight final desktop/mobile browser scenarios passed against the production container. Remote CI passed; Docker smoke/restart persistence passed.
+- [x] M6 implementation and deployment: Public GitHub repository, free Render/Neon deployment, all eight public desktop/mobile browser scenarios, HTTPS cookie/origin checks, nested routes/assets and live restart persistence verified. Demo and interview explanations are documented.
+- [ ] Submission completeness: supply and verify the original earlier planning conversation; check the final implementation response is captured and publish the reviewed latest transcript. Attach the user's accurate English CV and full name when the user submits.
 
-Acceptance evidence belongs in TEST_RESULTS.md. Public deployment belongs to M6 and remains blocked by account access. Incomplete external deliverables stay incomplete. Never send application email or purchase services.
+Acceptance evidence is in TEST_RESULTS.md; the actual live URL and maintenance details are in DEPLOYMENT.md. Account access and deployment are resolved. Missing earlier AI history remains explicitly incomplete. Never send application email or purchase services.

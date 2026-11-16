@@ -2,9 +2,11 @@
 
 A React/TypeScript marketplace served by one Go application, backed by persistent PostgreSQL. Hamza Mabrouk's internship assignment. All offers, seller ratings and keys are demonstration data; no real payment, license sale or email delivery occurs.
 
-Verified: 11 Go/database tests, four cart behavior tests, eight desktop/mobile browser scenarios, production Docker smoke/restart persistence, zero npm audit findings, and a [successful GitHub Actions run](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43851025137).
+Verified: 11 Go/database tests, four cart behavior tests, eight desktop/mobile browser scenarios both locally and against the public app, production Docker and live Render restart persistence, zero npm audit findings, and a [successful GitHub Actions run](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43857954156).
 
-**Submission status: incomplete.** GitHub: [mrhamzamabrouk/eneba-marketplace](https://github.com/mrhamzamabrouk/eneba-marketplace). Public app URL: not deployed. [AI history index](docs/AI_HISTORY.md) includes original implementation messages with explicit privacy redactions; earlier planning history remains missing. Do not submit until all mandatory deliverables work for a reviewer.
+**Live app: [Open the marketplace](https://eneba-marketplace-demo-uuhw.onrender.com).** Hosted on Render Free with persistent Neon Free PostgreSQL. GitHub: [mrhamzamabrouk/eneba-marketplace](https://github.com/mrhamzamabrouk/eneba-marketplace). Register your own demo account; no shared credentials or real payment are needed. The free host may take about a minute to wake after inactivity.
+
+**Submission history remains incomplete.** The [AI history index](docs/AI_HISTORY.md) includes original implementation and deployment messages with explicit privacy redactions; the earlier planning conversation is still missing. Supply that original history and an accurate English CV before submission. The app itself is deployed and verified.
 
 ## What works
 
@@ -98,11 +100,11 @@ npm.cmd run test:e2e
 Pop-Location
 ```
 
-Tests must never target the public demo database. Integration tests create disposable schemas only in the explicitly supplied `_test` database. Browser tests create test accounts and purchase demo inventory; use an isolated test server. [Actual results and limits](docs/TEST_RESULTS.md) distinguish executed checks from unexecuted CI/public checks.
+Database integration tests must never target the public demo database. They create disposable schemas only in the explicitly supplied `_test` database. Use an isolated test server for routine browser tests. A controlled fresh-browser evaluation also passed against the public demo using ordinary example.com accounts and simulated purchases. [Actual results and limits](docs/TEST_RESULTS.md) record local, CI and public checks separately.
 
 ## Deployment and scope
 
-The multistage [Dockerfile](Dockerfile) embeds React in Go and runs as a non-root user. [Render blueprint](render.yaml) selects the Free plan; use an external Neon Free PostgreSQL database. [Deployment instructions](docs/DEPLOYMENT.md) include prerequisites, exact environment names and a production verification checklist. Render Free sleeps after inactivity and has an ephemeral filesystem; all changing application data lives in PostgreSQL.
+The multistage [Dockerfile](Dockerfile) embeds React in Go and runs as a non-root user. The live service uses Render Free and external Neon Free PostgreSQL in Frankfurt. The validated [Render blueprint](render.yaml) is a reusable template; the existing service was created through the official Render API and is not Blueprint-managed. [Deployment instructions](docs/DEPLOYMENT.md) record the actual service, source revision, environment names and maintenance commands. Render Free sleeps after inactivity and has an ephemeral filesystem; all changing application data lives in PostgreSQL.
 
 Excluded: real payments, actual key activation, seller administration, email verification/delivery, coupons, wishlists, submitted reviews and currency conversion. Catalog matching/ranking is intentionally bounded to a small demo catalog and sorted in Go after SQL reads; moving pagination/ranking fully into indexed SQL is the scaling path. The in-memory login throttle resets on restart and is scoped to this single-server demo; proxy IPs are not blindly trusted. History shows the latest 100 orders. There is no password reset or account recovery.
 
