@@ -1,6 +1,10 @@
 param([string]$SessionPath,[string]$OutputName='implementation',[string]$ExpectedPromptFragment='Begin with M0')
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
+if (Test-Path -LiteralPath "$root/.private/history-capture-disabled") {
+  Write-Output 'History capture is disabled. The frozen submission transcript was not changed.'
+  return
+}
 if (-not $SessionPath) { throw 'Pass the exact verified original rollout path with -SessionPath.' }
 if ($OutputName -notmatch '^[a-zA-Z0-9_-]+$') { throw 'Use a simple distinct output name for each session.' }
 if (-not $ExpectedPromptFragment -or -not (Select-String -LiteralPath $SessionPath -SimpleMatch $ExpectedPromptFragment -Quiet)) { throw 'This log does not contain the verified assignment prompt fragment.' }

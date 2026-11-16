@@ -6,11 +6,22 @@ Status: INCOMPLETE until every assignment session is verified. This index and de
 
 The original Codex JSONL rollout was verified against the exact implementation request and the first three assistant messages. [Current implementation and deployment transcript](ai-history/implementation.md) is exported by scripts/export-history.ps1, preserving original user prompts and public assistant responses, including the account-access follow-ups and live deployment in this same conversation. Tool records, system/developer instructions and internal reasoning are excluded. No messages are reconstructed. The original is copied privately to the ignored .private directory.
 
-scripts/watch-history.ps1 can refresh the export every ten seconds for a bounded two-hour run, including the eventual final response if the host writes it during that period. Check the transcript after the response rather than assuming it was captured. Re-run export-history.ps1 with the original session path if the watcher has stopped. A final original message absent from the Markdown is still a missing segment.
+The export is now frozen at the completed deployment handoff on 16 November 2026, 12:16 UTC: 49 original visible user/assistant messages, including the final deployed-app response. Later conversation is outside this snapshot. The background watcher is stopped, and the project's private disabled marker prevents both export scripts from resuming capture. Do not restart recording, append later messages or remove that marker unless the user explicitly enables capture again.
 
-Submission copies explicitly redact local machine paths and unrelated saved GitHub account labels. The original remains unchanged privately. Secrets/tool records and internal reasoning are not included. A public GitHub snapshot cannot contain messages written after that commit; review and commit the refreshed transcript before submission.
+Submission copies explicitly redact local machine paths and unrelated saved GitHub account labels. The original snapshot within this boundary remains unchanged privately. Secrets/tool records and internal reasoning are not included. The chronological prompts and responses are preserved; this index is a reading guide rather than an edited replacement. Do not describe this frozen snapshot as a complete record of later conversations.
 
-For each new session use a distinct `-OutputName` (for example `deployment`) and an `-ExpectedPromptFragment` verified against that session's actual user request. The exporter refuses to overwrite another session's output. Add its Markdown link here and retain all previous exports. Current implementation output is `implementation.md`.
+If capture is explicitly enabled again, each new session needs a distinct `-OutputName` and a verified `-ExpectedPromptFragment`; preserve this frozen snapshot. Current implementation output is `implementation.md`.
+
+## Reading guide
+
+The transcript retains the original sequence, including failures and corrections:
+
+- Inspection, original requirements and truthful capture setup.
+- Go/PostgreSQL and React implementation, checkout/authentication, tests and UI review.
+- Privacy review, GitHub publication, CI and the initial deployment access blocker.
+- Provider authorization, free Render/Neon deployment, public browser checks and restart persistence.
+
+The existing DECISIONS.md, TEST_RESULTS.md and DEPLOYMENT.md provide concise cross-references. They do not replace the transcript.
 
 ## Missing history
 

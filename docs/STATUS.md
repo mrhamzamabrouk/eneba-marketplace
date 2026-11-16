@@ -20,6 +20,6 @@ Local preview remains http://localhost:8080 with persistent Compose PostgreSQL. 
 
 ## Remaining submission completeness
 
-The original PDF was read and both pages visually inspected. This implementation/deployment conversation is exported from its verified original rollout to docs/ai-history/implementation.md, with a private unchanged original. A bounded watcher refreshes visible prompts/responses locally. Review and commit the latest export before submission; messages after a public commit are not automatically published. Check the final response is captured after it is written.
+The original PDF was read and both pages visually inspected. The implementation/deployment export is frozen at the completed deployment handoff: 49 original visible messages, including its final reply. The watcher is stopped; a private disabled marker prevents either history script from resuming capture. Later conversation is outside the export. Do not restart capture or append later messages unless the user explicitly enables it again. AI_HISTORY.md describes the boundary and privacy redactions.
 
 The earlier planning ChatGPT conversation is still missing. AI_HISTORY.md gives the original export steps; summaries cannot replace it. Supply that history and the user's accurate English CV/full name before submission. The app is ready for review, while the full assignment package remains incomplete for this stated reason. Never send the application email automatically.

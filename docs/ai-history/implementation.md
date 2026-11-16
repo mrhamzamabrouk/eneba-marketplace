@@ -1,7 +1,7 @@
 # Original implementation conversation export
 
-Snapshot of public user prompts and assistant responses from the original Codex rollout. Tool records, system/developer instructions and internal reasoning are excluded. Earlier planning is missing. Refresh after the session ends to include the final reply.
-Submission privacy redactions are explicitly marked: local machine paths and unrelated saved GitHub account labels. The private original remains unchanged. No missing message is reconstructed.
+Frozen snapshot of original public user prompts and assistant responses through the completed deployment handoff. Tool records, system/developer instructions and internal reasoning are excluded. Earlier planning is missing. Later conversation is outside this export.
+Submission privacy redactions are explicitly marked: local machine paths and unrelated saved GitHub account labels. The private original snapshot remains unchanged within this export boundary. No missing message is reconstructed.
 
 ## 1. user
 
@@ -329,3 +329,17 @@ The restart check also passed: the same order and fake key remained available af
 ## 48. assistant
 
 The live checks are complete. I’ve updated the deployment instructions and test record with the verified URL. The app is ready for your review; the earlier planning conversation is still missing from the full assignment history.
+
+## 49. assistant
+
+Yes—deployed and working: **[Open the app](https://eneba-marketplace-demo-uuhw.onrender.com)**.
+
+Create a demo account to try checkout. Payments and keys are simulated.
+
+Verified all eight desktop/mobile browser tests, login, checkout, private order history, and persistence after a Render restart. Render and Neon both use free plans.
+
+[GitHub repository](https://github.com/mrhamzamabrouk/eneba-marketplace) · [AI history](https://github.com/mrhamzamabrouk/eneba-marketplace/blob/main/docs/AI_HISTORY.md)
+
+The [free host](https://render.com/docs/free) may take about a minute to wake after inactivity. The earlier planning history remains missing before assignment submission.
+
+Try it and send me the improvements you want.

@@ -30,7 +30,7 @@ This file records observed execution, not promises or coverage claims. The [publ
 | Public routing/assets | Refreshed /store, /product/elden-ring and /orders returned 200; referenced JS/CSS returned 200; missing API returned JSON 404, missing static file returned 404; all 12 homepage images decoded after scrolling |
 | Public restart persistence | Render CLI restarted the actual service; logs show new process at 12:10:05 UTC; a fresh login retrieved the same prior order, total and exact fake key |
 | Final local preview | http://localhost:8080 returned ready and references the final tested React bundle; app/PostgreSQL retained, temporary test servers stopped |
-| AI history | Verified original rollout; Markdown prompts/responses export and private original copy. Earlier planning still missing; final-response capture must be checked after it is written |
+| AI history | Verified original rollout; frozen 49-message Markdown export and private original snapshot through the final deployment reply. Later capture disabled; earlier planning still missing |
 
 ## Failures found and fixed
 
