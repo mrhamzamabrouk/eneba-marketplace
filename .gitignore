@@ -1,0 +1,13 @@
+node_modules/
+frontend/dist/
+backend/public/
+*.exe
+.env
+.env.*
+!.env.example
+.private/
+.tools/
+tmp/
+test-results/
+playwright-report/
+*.log
