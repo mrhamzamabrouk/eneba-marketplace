@@ -198,3 +198,19 @@ The public repository has been created at [mrhamzamabrouk/eneba-marketplace](htt
 All eight final desktop/mobile scenarios pass against the rebuilt production Docker image. The 11 backend tests also passed inside the Go 1.25 container. I’m pushing the reviewed source, CI, documentation, and explicitly redacted history snapshot next.
 
 M5 interview question: why test with real PostgreSQL? Mocks cannot prove that SQL locks, rollback, and key constraints work together.
+
+## 30. assistant
+
+The source is published, and [GitHub Actions passed](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43851025137): frontend checks/audit, real PostgreSQL tests, production build, and all desktop/mobile browser tests.
+
+The remaining deployment blocker is tool activation. Render and Neon are installed, but this running chat still has no tools for either provider. Their installation guide calls for a new chat after installation. I’m saving that exact state, including your existing authorization, so the next session can continue without repeating setup.
+
+## 31. assistant
+
+The final preview check caught a mismatch: port 8080 is healthy but is serving an older embedded frontend. I’m identifying the process and correcting that before handing over the local URL. The published source and GitHub CI are verified.
+
+## 32. assistant
+
+The local app is now verified at [http://localhost:8080](http://localhost:8080), with the final React build and database readiness confirmed. The cleanup check had compared Windows paths with different slash styles and missed the old process; that is fixed.
+
+Temporary test servers are stopped. The app and persistent PostgreSQL database remain running. I’m committing the final status and history snapshot so the new deployment session can pick up from the verified state.

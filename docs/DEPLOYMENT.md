@@ -1,6 +1,6 @@
 # Free deployment preparation
 
-No public deployment has been created. No paid resource or payment method has been used. The checked-in Dockerfile and Render blueprint build one Go service containing the React assets; PostgreSQL stays external.
+No public app deployment has been created. The source is published at https://github.com/mrhamzamabrouk/eneba-marketplace and runtime source passed remote CI. No paid resource or payment method has been used. The checked-in Dockerfile and Render blueprint build one Go service containing the React assets; PostgreSQL stays external.
 
 ## Provider verification, 16 November 2026
 
@@ -11,7 +11,7 @@ No public deployment has been created. No paid resource or payment method has be
 ## Exact remaining access steps
 
 1. Neon, Render and GitHub are now confirmed installed, and the user confirmed connected. GitHub account access was verified. The current session does not expose Neon/Render tools; start a new session in this same workspace to activate newly installed plugin tools if they remain unavailable. Do not request credentials in chat or unnecessarily reconnect working accounts.
-2. The user authorized a new public repository under mrhamzamabrouk: https://github.com/mrhamzamabrouk/eneba-marketplace. It was created; check STATUS.md for actual push status. Private commit email was removed from the agent-created initial commit and a GitHub noreply address configured for this repository only. Source/transcript privacy review excludes private originals, CV, tokens and unrelated account labels.
+2. The user-authorized public source is pushed under mrhamzamabrouk: https://github.com/mrhamzamabrouk/eneba-marketplace. Do not recreate it or re-request authorization. Private commit email was removed from the agent-created initial commit and a GitHub noreply address configured for this repository only. Source/transcript privacy review excludes private originals, CV, tokens and unrelated account labels. Check STATUS.md for the passing CI source revision.
 3. Create a Neon **Free** project/database in a region near Render. Save its TLS connection string directly in Render's secret environment configuration as `DATABASE_URL`. Do not paste it into chat, source, screenshots or command output.
 4. Create a Render **Free** Docker web service from the reviewed repository, using the root Dockerfile or render.yaml blueprint. Set `APP_ORIGIN` to its exact assigned HTTPS URL, `SECURE_COOKIES=true`, `SEED_DEMO=true`, and `SEARCH_MODE=trigram`. Render supplies `PORT`. Use `/api/ready` for readiness.
 5. Deploy the exact tested commit, record the commit SHA and URL, and perform the fresh-browser checks below. Do not call the assignment ready just because a build succeeds.

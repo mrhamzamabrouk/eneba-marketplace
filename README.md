@@ -2,6 +2,8 @@
 
 A React/TypeScript marketplace served by one Go application, backed by persistent PostgreSQL. Hamza Mabrouk's internship assignment. All offers, seller ratings and keys are demonstration data; no real payment, license sale or email delivery occurs.
 
+Verified: 11 Go/database tests, four cart behavior tests, eight desktop/mobile browser scenarios, production Docker smoke/restart persistence, zero npm audit findings, and a [successful GitHub Actions run](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43851025137).
+
 **Submission status: incomplete.** GitHub: [mrhamzamabrouk/eneba-marketplace](https://github.com/mrhamzamabrouk/eneba-marketplace). Public app URL: not deployed. [AI history index](docs/AI_HISTORY.md) includes original implementation messages with explicit privacy redactions; earlier planning history remains missing. Do not submit until all mandatory deliverables work for a reviewer.
 
 ## What works
