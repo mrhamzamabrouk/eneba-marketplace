@@ -1,0 +1,56 @@
+name: Verify marketplace
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17.6-alpine
+        env:
+          POSTGRES_USER: eneba
+          POSTGRES_PASSWORD: localdemo
+          POSTGRES_DB: eneba_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U eneba -d eneba_test"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgres://eneba:localdemo@localhost:5432/eneba_test?sslmode=disable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+          cache-dependency-path: backend/go.sum
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run typecheck && npm run lint && npm run test && npm run build && npm audit --audit-level=moderate
+        working-directory: frontend
+      - run: test -z "$(gofmt -l .)" && go vet ./... && go test -count=1 -v ./... && go build -trimpath -o ../server .
+        working-directory: backend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Start production artifact
+        run: |
+          DATABASE_URL="$TEST_DATABASE_URL" APP_ORIGIN=http://localhost:8080 SEED_DEMO=true ./server > /tmp/eneba-server.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://localhost:8080/api/ready; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/eneba-server.log
+          exit 1
+      - run: npm run test:e2e
+        working-directory: frontend
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-failure-evidence
+          path: frontend/test-results
+          retention-days: 3

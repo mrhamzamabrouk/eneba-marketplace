@@ -4,7 +4,13 @@ Status: INCOMPLETE until every assignment session is verified. This index and de
 
 ## Current implementation session
 
-A local original Codex JSONL rollout was found under the user's .codex/sessions directory. It must be verified against this user's exact implementation request before exporting. Export only user prompts and public assistant messages; do not publish system/developer instructions, hidden reasoning, credentials, or unrelated conversations. Retain the original privately in the ignored .private directory. Refresh the Markdown export after the final response because a running session cannot contain its future messages.
+The original Codex JSONL rollout was verified against the exact implementation request and the first three assistant messages. [Current implementation transcript](ai-history/implementation.md) is exported by scripts/export-history.ps1, preserving original user prompts and public assistant responses. Tool records, system/developer instructions and internal reasoning are excluded. No messages are reconstructed. The original is copied privately to the ignored .private directory.
+
+scripts/watch-history.ps1 can refresh the export every ten seconds for a bounded two-hour run, including the eventual final response if the host writes it during that period. Check the transcript after the response rather than assuming it was captured. Re-run export-history.ps1 with the original session path if the watcher has stopped. A final original message absent from the Markdown is still a missing segment.
+
+Submission copies explicitly redact local machine paths and unrelated saved GitHub account labels. The original remains unchanged privately. Secrets/tool records and internal reasoning are not included. A public GitHub snapshot cannot contain messages written after that commit; review and commit the refreshed transcript before submission.
+
+For each new session use a distinct `-OutputName` (for example `deployment`) and an `-ExpectedPromptFragment` verified against that session's actual user request. The exporter refuses to overwrite another session's output. Add its Markdown link here and retain all previous exports. Current implementation output is `implementation.md`.
 
 ## Missing history
 
