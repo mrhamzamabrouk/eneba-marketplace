@@ -14,6 +14,8 @@ If capture is explicitly enabled again, each new session needs a distinct `-Outp
 
 ## Reading guide
 
+Start with the [technical reviewer reading guide](AI_REVIEW_GUIDE.md) for direct links to scope decisions, checkout correctness, verification and deployment. It is a navigation aid; it does not replace or shorten the original transcript.
+
 The transcript retains the original sequence, including failures and corrections:
 
 - Inspection, original requirements and truthful capture setup.
