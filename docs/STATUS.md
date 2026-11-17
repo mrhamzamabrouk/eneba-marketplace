@@ -1,25 +1,23 @@
-# Status — 16 November 2026
+# Project status — 17 November 2026
 
-The application is deployed and verified at **https://eneba-marketplace-demo-uuhw.onrender.com**. Public source: https://github.com/mrhamzamabrouk/eneba-marketplace. The user can now review the working app and request improvements. No payment, paid resource or application email was sent.
+**App:** https://eneba-marketplace-demo-uuhw.onrender.com
 
-## Verified delivery
+**Source:** https://github.com/mrhamzamabrouk/eneba-marketplace
 
-- Runtime source: `2ca1486f16dbd93e01095e06ac1ec89c7683c599`; [remote CI passed](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43857954156). Later documentation/history commits do not alter the deployed application.
-- Render Free Docker service `srv-dbtf22jncjis73a377u0`, Frankfurt; deployment `dep-dbtf2p0ae00c73d8ahk0` is live. Neon Free project `super-salad-02795926`, PostgreSQL 17, AWS eu-central-1, fixed 0.25 CU with scale-to-zero. Database is external to the container.
-- Eleven Go/real-PostgreSQL tests, four cart tests, frontend checks/audit, portable production Docker build and local smoke/restart passed. All eight desktop/mobile browser scenarios also passed against the actual public HTTPS app in 50.8 seconds.
-- Public evaluation covered search, filters/sort/refresh, offers, cart, registration/login, declined/successful simulated payments, price reconfirmation, private keys/history, logout and second-account denial. Secure/HttpOnly/SameSite cookies, foreign Origin rejection, nested routes, assets and JSON API 404s were checked separately.
-- Render restarted at 12:10:05 UTC; a fresh login recovered the same previously purchased order and fake key afterward. No destructive integration tests were run against public data.
+The marketplace is deployed. Payments, seller data and digital keys are demonstrations only. No application email has been sent.
 
-## Access and maintenance
+## Verification evidence
 
-Neon, Render and GitHub connections are resolved. Installed plugin skills were used; because Render/Neon remote tools were absent in this session, authenticated official CLIs and the Render API performed provisioning and deployment. Do not ask the user to reconnect or recreate the existing repository/project/service. Reuse the resources in DEPLOYMENT.md. Credentials remain in their standard CLI store/keyring or Render secret configuration, never source/chat.
+The implementation record reports 11 Go/PostgreSQL tests, four cart tests, eight desktop/mobile browser scenarios and live persistence checks. See [TEST_RESULTS.md](TEST_RESULTS.md) for dated results and execution boundaries; these historical results are not a claim that every check was rerun during the submission review.
 
-Source publication under mrhamzamabrouk was explicitly authorized and privacy-reviewed. Project-local Git uses the verified GitHub noreply author address; no global identity changed. Private PDF, original brief, raw rollouts, CV, account credentials and helper scripts remain ignored. The public brief/transcript marks privacy redactions explicitly.
+The latest recorded GitHub Actions run before the submission documentation edits, [43866894434](https://github.com/mrhamzamabrouk/eneba-marketplace/actions/runs/43866894434), completed successfully. Relative Markdown links were checked against the repository tree during the 17 November review, with no missing targets found. Documentation-only updates do not require redeploying the application.
 
-Local preview remains http://localhost:8080 with persistent Compose PostgreSQL. Isolated local test databases are eneba_test and eneba_e2e_test. The temporary local 8081/8082 test servers were stopped. Do not run destructive tests against the public database or reset/reseed sold keys.
+## Submission readiness
 
-## Remaining submission completeness
+An English software-engineering CV has been prepared and attached privately to an unsent Gmail draft addressed to internship@eneba.com. The draft includes Hamza Mabrouk's name and the app, repository and AI-history links. The CV is not published in this repository.
 
-The original PDF was read and both pages visually inspected. The implementation/deployment export is frozen at the completed deployment handoff: 49 original visible messages, including its final reply. The watcher is stopped; a private disabled marker prevents either history script from resuming capture. Later conversation is outside the export. Do not restart capture or append later messages unless the user explicitly enables it again. AI_HISTORY.md describes the boundary and privacy redactions.
+The [implementation/deployment transcript](ai-history/implementation.md) is a frozen 49-message snapshot through the completed deployment handoff. Its original wording, failures, corrections and explicit privacy redactions are preserved. Later conversations are outside that snapshot. Keep it unchanged and add new original conversation segments as separate files.
 
-The earlier planning ChatGPT conversation is still missing. AI_HISTORY.md gives the original export steps; summaries cannot replace it. Supply that history and the user's accurate English CV/full name before submission. The app is ready for review, while the full assignment package remains incomplete for this stated reason. Never send the application email automatically.
+**The earlier planning conversation remains missing.** It must be supplied as original full prompts and responses or an accessible original conversation link, then indexed in [AI_HISTORY.md](AI_HISTORY.md). A summary or reconstruction does not close this gap. Do not mark the full submission package complete until this requirement is met.
+
+See [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) for final review steps. Keep credentials, private account exports, the CV and unrelated conversations out of the public source. Preserve application data and use isolated databases for destructive tests. Do not recreate hosting resources or send the application email automatically.
