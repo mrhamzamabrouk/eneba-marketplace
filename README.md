@@ -6,7 +6,7 @@ Verified: 11 Go/database tests, four cart behavior tests, eight desktop/mobile b
 
 **Live app: [Open the marketplace](https://eneba-marketplace-demo-uuhw.onrender.com).** Hosted on Render Free with persistent Neon Free PostgreSQL. GitHub: [mrhamzamabrouk/eneba-marketplace](https://github.com/mrhamzamabrouk/eneba-marketplace). Register your own demo account; no shared credentials or real payment are needed. The free host may take about a minute to wake after inactivity.
 
-**Submission history remains incomplete.** The [AI history index](docs/AI_HISTORY.md) includes original implementation and deployment messages with explicit privacy redactions; the earlier planning conversation is still missing. Supply that original history and an accurate English CV before submission. The app itself is deployed and verified.
+**Submission history remains incomplete.** The [AI history index](docs/AI_HISTORY.md) includes original implementation and deployment messages with explicit privacy redactions; the earlier planning conversation is still missing. The English CV has been prepared separately for the application email; add the original planning history before submission. The app itself is deployed and verified.
 
 ## What works
 
